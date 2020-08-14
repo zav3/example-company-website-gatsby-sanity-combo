@@ -93,6 +93,15 @@ export const query = graphql`
         }
       }
     }
+
+    clients: allSanityClient(limit: 1, sort: { fields: [name], order: DESC }) {
+      edges {
+        node {
+          id
+          name
+        }
+      }
+    }
   }
 `
 
@@ -112,6 +121,10 @@ const IndexPage = props => {
         : []
     const projectNodes = (data || {}).projects
         ? mapEdgesToNodes(data.projects).filter(filterOutDocsWithoutSlugs)
+        : []
+      
+    const clientNodes = (data || {}).clients
+        ? mapEdgesToNodes(data.clients)
         : []
 
     if (!site) {
@@ -137,6 +150,12 @@ const IndexPage = props => {
                     browseMoreHref='/projects/'
                     />
                 )}
+                {clientNodes && (
+                  <Link to='/'>Clients</Link>
+                  
+                  //title='Clients'
+                  //nodes={clientNodes}
+                )}
                 {postNodes && (
                     <BlogPostPreviewGrid
                     title='Latest blog posts'
@@ -144,6 +163,7 @@ const IndexPage = props => {
                     browseMoreHref='/blog/'
                     />
                 )}
+                
             </Container>
         </Layout>
         </>
