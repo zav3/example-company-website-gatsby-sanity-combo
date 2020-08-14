@@ -19,6 +19,9 @@ import project from './project'
 import projectMember from './projectMember'
 import siteSettings from './siteSettings'
 import slideshow from './slideshow'
+import client from './client'
+import serviceData from './serviceData'
+import saltDelivery from './saltDelivery'
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -33,6 +36,7 @@ export default createSchema({
     blockText,
     category,
     companyInfo,
+    client,
     figure,
     mainImage,
     page,
@@ -42,6 +46,8 @@ export default createSchema({
     project,
     projectMember,
     siteSettings,
+    serviceData,
+    saltDelivery,
     slideshow
 
     // When added to this list, object types can be used as
