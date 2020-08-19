@@ -14,6 +14,7 @@ import { getUser, isLoggedIn } from "../services/auth"
 import BlogPostPreviewGrid from '../components/blog-post-preview-grid'
 import Container from '../components/container'
 import ProjectPreviewGrid from '../components/project-preview-grid'
+import Client from '../components/client'
 
 export const query = graphql`
   query IndexPageQuery {
@@ -94,7 +95,7 @@ export const query = graphql`
       }
     }
 
-    clients: allSanityClient(limit: 1, sort: { fields: [name], order: DESC }) {
+    clients: allSanityClient(limit: 6, sort: { fields: [name], order: DESC }) {
       edges {
         node {
           id
@@ -151,10 +152,11 @@ const IndexPage = props => {
                     />
                 )}
                 {clientNodes && (
-                  <Link to='/'>Clients</Link>
-                  
-                  //title='Clients'
-                  //nodes={clientNodes}
+                  <Client
+                  title ='Clients'
+                  nodes={clientNodes}
+                  browseMoreHref='/clients'
+                  />
                 )}
                 {postNodes && (
                     <BlogPostPreviewGrid
