@@ -51,6 +51,7 @@ async function createProjectPages (graphql, actions, reporter) {
         edges {
           node {
             id
+            name
             slug {
               current
             }
@@ -79,9 +80,45 @@ async function createProjectPages (graphql, actions, reporter) {
   })
 }
 
+async function createClientPage (graphql, actions, reporter) {
+  const { createPage } = actions
+  const result = await graphql(`
+    {
+      allSanityClient(filter: { slug: { current: { ne: null } } }) {
+        edges {
+          node {
+            id
+            name
+            slug {
+              current
+            }
+          }
+        }
+      }
+    }
+  `)
+
+  if (result.errors) throw result.errors
+
+  const clientEdges = (result.data.allSanityClient || {}).edges || []
+
+  clientEdges.forEach((edge, index) => {
+    const { id, name = {}} = edge.node
+    const path = `/clients/${slug}/`
+
+    reporter.info(`Creating clients page: ${path}`)
+
+    createPage({
+      path,
+      context: { id }
+    })
+  })
+}
+
 exports.createPages = async ({ graphql, actions, reporter }) => {
   await createBlogPostPages(graphql, actions, reporter)
   await createProjectPages(graphql, actions, reporter)
+  await createClientPage(graphql, actions, reporter)
 }
 
 exports.onCreatePage = async ({ page, actions }) => {
