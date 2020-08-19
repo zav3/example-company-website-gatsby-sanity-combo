@@ -1,24 +1,47 @@
 export default {
-    title: 'Clients',
-    name: 'client',
-    type: 'document',
-    fields: [
+  name: 'client',
+  title: 'Client',
+  type: 'document',
+  fields: [
     {
-        name: 'name',
-        type: 'string',
-        title: 'Name',
+      name: 'name',
+      title: 'Name',
+      type: 'string',
        
     },
     {
-        name: 'services',
-        title: 'Service History',
-        type: 'array',
-        of: [
-          {
-              title: 'Service Type',
-              type: 'serviceData',
-          }
-        ]
+      name: 'slug',
+      title: 'Slug',
+      type: 'slug',
+      description: 'Some frontend will require a slug to be set to be able to show the person',
+      options: {
+        source: 'name',
+        maxLength: 96
       }
-    ]
+    },
+    {
+      name: 'services',
+      title: 'Service History',
+      type: 'array',
+      of: [
+        {
+          title: 'Service Type',
+          type: 'serviceData',
+        }
+      ]
+    }
+  ],
+  preview: {
+    select: {
+      name: 'name',
+      services: 'services'
+      
+    },
+    prepare ({ name = 'No name', services }) {
+      return {
+        name,
+        subtitle: services
+      }
+    }
+  }
 }
