@@ -7,7 +7,7 @@ import { responsiveTitle3 } from './typography.module.css'
 
 function ClientPreview (props) {
   return (
-    <Link className={styles.root} to={`/client/${props.name}`}>
+    <Link className={styles.root} to={`/client/${props.slug.current}`}>
       <h3 className={cn(responsiveTitle3, styles.title)}>{props.title}</h3>
       {props.name && (
         <div className={styles.title}>
