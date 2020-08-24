@@ -1,9 +1,9 @@
 import { Link } from 'gatsby'
 import React from 'react'
 import Container from './container'
-
+import ClientList from './client-list'
 import styles from './project-preview-grid.module.css'
-import serviceData from '../../../studio/schemas/serviceData'
+
 
 function Client (props) {
   const { name, services } = props
@@ -27,7 +27,7 @@ function Client (props) {
             <h3>Services</h3>
             <ul>
               {services.map(service => (
-                <li key={services._id}>{serviceData.name}</li>
+                <li key={services._id}>{service.name}</li>
               ))}
             </ul>
           </div>
