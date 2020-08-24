@@ -20,7 +20,6 @@ export default {
             },
         },
         {
-            
             title: 'Date',
             name: 'date',
             type: 'date'
