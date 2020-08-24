@@ -16,6 +16,9 @@ export const query = graphql`
         node {
           id
           name
+          services {
+            serviceType
+          }
         }
       }
     }
@@ -32,7 +35,7 @@ const ClientsPage = props => {
     )
     }
     const clientNodes =
-    data && data.clients && mapEdgesToNodes(data.clients)
+    data && data.clients && mapEdgesToNodes(data.clients).filter(filterOutDocsWithoutSlugs)
     return (
     <Layout>
       <SEO title='Clients' />
