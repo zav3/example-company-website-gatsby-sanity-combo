@@ -51,7 +51,6 @@ async function createProjectPages (graphql, actions, reporter) {
         edges {
           node {
             id
-            name
             slug {
               current
             }
