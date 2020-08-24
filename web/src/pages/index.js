@@ -155,7 +155,7 @@ const IndexPage = props => {
                   <Client
                   title ='Clients'
                   nodes={clientNodes}
-                  browseMoreHref='/clients'
+                  browseMoreHref='/clients/'
                   />
                 )}
                 {postNodes && (
