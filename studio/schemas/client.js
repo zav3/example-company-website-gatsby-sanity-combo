@@ -1,3 +1,4 @@
+
 export default {
   name: 'client',
   title: 'Client',
@@ -33,14 +34,15 @@ export default {
   ],
   preview: {
     select: {
-      name: 'name',
-      services: 'services'
-      
+      title: 'name',
+      services: 'services' 
     },
-    prepare ({ name = 'No name', services }) {
+    prepare ({ title = 'No name', services }) {
       return {
-        name,
+        title,
         subtitle: services
+          ? services.length
+          : 'no service history'
       }
     }
   }
