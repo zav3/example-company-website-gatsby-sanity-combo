@@ -87,7 +87,6 @@ async function createClientPage (graphql, actions, reporter) {
         edges {
           node {
             id
-            name
             slug {
               current
             }
@@ -101,14 +100,16 @@ async function createClientPage (graphql, actions, reporter) {
 
   const clientEdges = (result.data.allSanityClient || {}).edges || []
 
-  clientEdges.forEach((edge, index) => {
+  clientEdges.forEach(edge => {
     const { id, name = {}} = edge.node
+    const slug = edge.node.slug.current
     const path = `/clients/${slug}/`
 
     reporter.info(`Creating clients page: ${path}`)
 
     createPage({
       path,
+      component: require.resolve('./src/templates/client.js'),
       context: { id }
     })
   })
