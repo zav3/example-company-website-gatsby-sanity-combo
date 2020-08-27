@@ -1,19 +1,59 @@
-import { number } from "prop-types"
-
 export default {
   name: 'client',
   title: 'Client',
   type: 'document',
   fields: [
     {
-      name: 'name',
-      title: 'Name',
+      name: 'lastName',
+      title: 'Last Name',
       type: 'string',
        
     },
     {
-      name: 'number',
-      title: 'Number',
+      name: 'firstName',
+      title: 'First Name',
+      type: 'string',
+       
+    },
+    {
+      name: 'phoneNumber1',
+      title: 'Phone #1',
+      type: 'string',
+       
+    },
+    {
+      name: 'phoneNumber2',
+      title: 'Phone #2',
+      type: 'string',
+       
+    },
+    {
+      name: 'email',
+      title: 'Email',
+      type: 'string',
+       
+    },
+    {
+      name: 'address',
+      title: 'Address',
+      type: 'string',
+       
+    },
+    {
+      name: 'subdivision',
+      title: 'Subdivision',
+      type: 'string',
+       
+    },
+    {
+      name: 'city',
+      title: 'City',
+      type: 'string',
+       
+    },
+    {
+      name: 'zipcode',
+      title: 'Zipcode',
       type: 'string',
        
     },
@@ -23,7 +63,7 @@ export default {
       type: 'slug',
       description: 'Some frontend will require a slug to be set to be able to show the person',
       options: {
-        source: 'number',
+        source: 'email',
         maxLength: 96
       }
     },
@@ -31,21 +71,21 @@ export default {
       name: 'services',
       title: 'Service History',
       type: 'array',
-      of: [{ type: 'reference', to: { type: 'serviceData' } }]
+      of: [{ type: 'serviceData' }]
     }
   ],
   preview: {
     select: {
-      title: 'name',
-      number: 'number',
+      title: 'lastName', //Might change this to (lastName: 'lastName')
+      firstName: 'firstName',
       services: 'services' 
     },
-    prepare ({ title = 'No name', number }) {
+    prepare ({ title = 'No name', firstName }) {
       return {
         title,
-        subtitle: number
-          ? number
-          : 'no number entered'
+        subtitle: firstName
+          ? firstName
+          : 'no firstname entered'
       }
     }
   }
