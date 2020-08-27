@@ -1,17 +1,22 @@
-import { Link } from 'gatsby'
 import React from 'react'
 import Container from './container'
-import ClientList from './client-list'
 import styles from './project-preview-grid.module.css'
-import BlockContent from './block-text'
 
 function Client (props) {
-  const { name, number, services } = props
+  const { lastName, firstName, phoneNumber1, phoneNumber2, email, address, subdivision, city, zipcode, services } = props
   return (
     <Container>
       <div className={styles.grid}>
         <div className={styles.mainContent}>
-            <h1 className={styles.title}>{name}</h1>
+            <h1 className={styles.title}>{firstName + ' ' + lastName}</h1>
+            {phoneNumber1 && (
+              <div className={styles.relatedProjects}>
+                <h3 className={styles.relatedProjectsHeadline}>Phone #1</h3>
+                <ul>
+                  {phoneNumber1}
+                </ul>
+              </div>
+            )}
         </div>
         <aside className={styles.metaContent}>
             {services && (
@@ -19,11 +24,12 @@ function Client (props) {
                 <h3 className={styles.categoriesHeadline}>Services</h3>
                 <ul>
                   {services.map(service => (
-                    <li key={service._id}>{service.title}</li>
+                    <li key={service._id}>{service.serviceType}</li>
                   ))}
                 </ul>
               </div>
             )}
+            
           </aside>
       </div>
     </Container>
