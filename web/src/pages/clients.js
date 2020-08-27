@@ -11,12 +11,13 @@ import ClientPreviewGrid from '../components/client-preview-grid'
 
 export const query = graphql`
   query clientPageQuery {
-    clients: allSanityClient(limit: 12, sort: { fields: [name], order: DESC }) {
+    clients: allSanityClient(limit: 12, sort: { fields: [lastName], order: DESC }) {
       edges {
         node {
           id
-          name
-          number
+          lastName
+          firstName
+          phoneNumber1
           services {
             serviceType
           }
