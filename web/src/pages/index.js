@@ -96,12 +96,13 @@ export const query = graphql`
       }
     }
 
-    clients: allSanityClient(limit: 6, sort: { fields: [name], order: DESC }) {
+    clients: allSanityClient(limit: 6, sort: { fields: [lastName], order: DESC }) {
       edges {
         node {
           id
-          name
-          number
+          lastName
+          firstName
+          phoneNumber1
           services {
             serviceType
           }
