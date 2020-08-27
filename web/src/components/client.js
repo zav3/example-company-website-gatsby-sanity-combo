@@ -3,35 +3,28 @@ import React from 'react'
 import Container from './container'
 import ClientList from './client-list'
 import styles from './project-preview-grid.module.css'
-
+import BlockContent from './block-text'
 
 function Client (props) {
-  const { name, services } = props
+  const { name, number, services } = props
   return (
     <Container>
-      <div className={styles.root}>
-        {props.title && (
-          <h2 className={styles.headline}>
-            {props.browseMoreHref ? (
-              <Link to={props.browseMoreHref}>{props.title}</Link>
-            ) : (
-              props.title
+      <div className={styles.grid}>
+        <div className={styles.mainContent}>
+            <h1 className={styles.title}>{name}</h1>
+        </div>
+        <aside className={styles.metaContent}>
+            {services && (
+              <div className={styles.categories}>
+                <h3 className={styles.categoriesHeadline}>Services</h3>
+                <ul>
+                  {services.map(service => (
+                    <li key={service._id}>{service.title}</li>
+                  ))}
+                </ul>
+              </div>
             )}
-          </h2>
-        )}
-      </div>
-      <div>
-        {name && <ClientList items={name} title='Clients' /> }
-        {services && (
-          <div className={styles.categories}>
-            <h3>Services</h3>
-            <ul>
-              {services.map(service => (
-                <li key={services._id}>{service.name}</li>
-              ))}
-            </ul>
-          </div>
-        )}
+          </aside>
       </div>
     </Container>
   )
