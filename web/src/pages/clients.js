@@ -7,17 +7,21 @@ import Layout from '../containers/layout'
 import { mapEdgesToNodes, filterOutDocsWithoutSlugs } from '../lib/helpers'
 import { responsiveTitle1 } from '../components/typography.module.css'
 
-import ClientPreview from '../components/client-preview'
+import ClientPreviewGrid from '../components/client-preview-grid'
 
 export const query = graphql`
   query clientPageQuery {
-    clients: allSanityClient {
+    clients: allSanityClient(limit: 12, sort: { fields: [name], order: DESC }) {
       edges {
         node {
           id
           name
+          number
           services {
             serviceType
+          }
+          slug {
+            current
           }
         }
       }
@@ -41,7 +45,7 @@ const ClientsPage = props => {
       <SEO title='Clients' />
       <Container>
         <h1 className={responsiveTitle1}>Clients</h1>
-        {clientNodes && clientNodes.length > 0 && <ClientPreview nodes={clientNodes} />}
+        {clientNodes && clientNodes.length > 0 && <ClientPreviewGrid nodes={clientNodes} />}
       </Container>
     </Layout>
   )
