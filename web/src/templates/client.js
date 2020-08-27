@@ -10,8 +10,9 @@ export const query = graphql`
   query ClientTemplateQuery($id: String!) {
     client: sanityClient(id: { eq: $id }) {
       id
-      name
-      number
+      lastName
+      firstName
+      phoneNumber1
       services {
         serviceType
       }
@@ -28,7 +29,7 @@ const ClientTemplate = props => {
   return (
     <Layout>
       {errors && <SEO title='GraphQL Error' />}
-      {client && <SEO title={client.name || 'Untitled'} />}
+      {client && <SEO title={client.lastName || 'Untitled'} />}
 
       {errors && (
         <Container>
