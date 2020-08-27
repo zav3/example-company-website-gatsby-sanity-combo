@@ -15,6 +15,7 @@ import BlogPostPreviewGrid from '../components/blog-post-preview-grid'
 import Container from '../components/container'
 import ProjectPreviewGrid from '../components/project-preview-grid'
 import Client from '../components/client'
+import ClientPreviewGrid from '../components/client-preview-grid'
 
 export const query = graphql`
   query IndexPageQuery {
@@ -100,6 +101,13 @@ export const query = graphql`
         node {
           id
           name
+          number
+          services {
+            serviceType
+          }
+          slug {
+            current
+          }
         }
       }
     }
@@ -125,7 +133,7 @@ const IndexPage = props => {
         : []
       
     const clientNodes = (data || {}).clients
-        ? mapEdgesToNodes(data.clients)
+        ? mapEdgesToNodes(data.clients).filter(filterOutDocsWithoutSlugs)
         : []
 
     if (!site) {
@@ -152,7 +160,7 @@ const IndexPage = props => {
                     />
                 )}
                 {clientNodes && (
-                  <Client
+                  <ClientPreviewGrid
                   title ='Clients'
                   nodes={clientNodes}
                   browseMoreHref='/clients/'
