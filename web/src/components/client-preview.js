@@ -8,10 +8,10 @@ import { responsiveTitle3 } from './typography.module.css'
 function ClientPreview (props) {
   return (
     <Link className={styles.root} to={`/clients/${props.slug.current}`}>
-      <h3 className={cn(responsiveTitle3, styles.title)}>{props.name}</h3>
-      {props.number && (
-        <div className={styles.title}>
-            {props.number}
+      <h3 className={cn(responsiveTitle3, styles.title)}>{props.firstName + ' ' + props.lastName}</h3>
+      {props.phoneNumber1 && (
+        <div className={styles.excerpt}>
+            {props.phoneNumber1}
         </div>
       )}
     </Link>
