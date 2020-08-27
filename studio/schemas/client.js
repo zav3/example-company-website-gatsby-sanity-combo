@@ -1,3 +1,4 @@
+import { number } from "prop-types"
 
 export default {
   name: 'client',
@@ -11,12 +12,18 @@ export default {
        
     },
     {
+      name: 'number',
+      title: 'Number',
+      type: 'string',
+       
+    },
+    {
       name: 'slug',
       title: 'Slug',
       type: 'slug',
       description: 'Some frontend will require a slug to be set to be able to show the person',
       options: {
-        source: 'name',
+        source: 'number',
         maxLength: 96
       }
     },
@@ -24,25 +31,21 @@ export default {
       name: 'services',
       title: 'Service History',
       type: 'array',
-      of: [
-        {
-          title: 'Service Type',
-          type: 'serviceData',
-        }
-      ]
+      of: [{ type: 'reference', to: { type: 'serviceData' } }]
     }
   ],
   preview: {
     select: {
       title: 'name',
+      number: 'number',
       services: 'services' 
     },
-    prepare ({ title = 'No name', services }) {
+    prepare ({ title = 'No name', number }) {
       return {
         title,
-        subtitle: services
-          ? services.length
-          : 'no service history'
+        subtitle: number
+          ? number
+          : 'no number entered'
       }
     }
   }
