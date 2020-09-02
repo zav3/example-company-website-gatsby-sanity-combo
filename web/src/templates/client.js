@@ -13,6 +13,12 @@ export const query = graphql`
       lastName
       firstName
       phoneNumber1
+      phoneNumber2
+      email
+      address
+      subdivision
+      city
+      zipcode
       services {
         serviceType
       }
