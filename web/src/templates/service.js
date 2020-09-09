@@ -28,9 +28,6 @@ export const query = graphql`
         ro 
         description3
       }
-      slug {
-        current
-      }
     }
   }
 `
