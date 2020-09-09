@@ -21,6 +21,22 @@ export const query = graphql`
       zipcode
       services {
         serviceType
+        serviceDate 
+        salesAmount
+        equipment {
+          equipmentUsed
+        }
+        lastService1 
+        cardSent1 
+        nextServiceDue1 
+        description1 
+        lastService2
+        cardSent2 
+        nextServiceDue2 
+        description2 
+        ac
+        ro 
+        description3
       }
       slug {
         current
