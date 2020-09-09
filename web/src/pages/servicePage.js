@@ -6,7 +6,7 @@ import Layout from '../containers/layout'
 import { mapEdgesToNodes, filterOutDocsWithoutSlugs } from '../lib/helpers'
 import { responsiveTitle1 } from '../components/typography.module.css'
 import { graphql } from 'gatsby'
-import ServicePreview from '../components/servicePreview'
+import Service from '../components/service-preview-grid'
 
 export const query = graphql`
   query servicePageQuery {
@@ -16,11 +16,15 @@ export const query = graphql`
           id
           services {
             serviceType
+            slug {
+              current
+            }
             
           }
           slug {
             current
           }
+          
         }
       }
     }
@@ -43,7 +47,7 @@ const ServicePage = props => {
       <SEO title='Services' />
       <Container>
         <h1 className={responsiveTitle1}>Services</h1>
-        {serviceNodes && serviceNodes.length > 0 && <ServicePreview nodes={serviceNodes} />}
+        {serviceNodes && serviceNodes.length > 0 && <Service nodes={serviceNodes} />}
       </Container>
     </Layout>
   )
