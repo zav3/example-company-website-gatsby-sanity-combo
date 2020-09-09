@@ -7,7 +7,7 @@ import { responsiveTitle3 } from './typography.module.css'
 
 function ServicePreview (props) {
   return (
-    <Link className={styles.root} to={`/servicePage/${props}`}>
+    <Link className={styles.root} to={`/service/${props.serviceDate}/`}>
         <h3 className={cn(responsiveTitle3, styles.title)}>{props.serviceType}</h3>
     </Link>
   )
