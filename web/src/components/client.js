@@ -5,6 +5,8 @@ import { Link } from 'gatsby'
 import { cn } from '../lib/helpers'
 import { responsiveTitle3 } from './typography.module.css'
 import ServicePreview from './servicePreview'
+import ServicePreviewGrid from './service-preview-grid'
+import client from '../../../studio/schemas/client'
 
 
 function Client (props) {
@@ -72,22 +74,21 @@ function Client (props) {
             )}
         </div>
         <aside className={styles.metaContent}>
-            {services && (
-              <div className={styles.categories}>
-                <h3 className={styles.categoriesHeadline}>Services</h3>
+        {services && (
+           <div className={styles.relatedProjects}>
+             <h3 className={styles.relatedProjectsHeadline}>Services</h3>
                 <ul>
-                  {services.map(node => (
-                      <li key={node.id}>
-                        <ServicePreview {...node} />
+                    {services.map(service => (
+                      <li key={service._id}>
+                        <Link to={`/client/${props.slug.current}/service/${service.serviceDate}`}>{service.serviceDate}</Link>
                       </li>
-                    ))}
+                  ))}
                 </ul>
-              </div>
-            )}
-            
-          </aside>
+            </div>
+        )} 
+        </aside>
       </div>
-    </Container>
+      </Container>
   )
 }
 
