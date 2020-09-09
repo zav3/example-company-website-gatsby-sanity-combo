@@ -1,7 +1,7 @@
 export default {
     title: 'Service Data',
     name: 'serviceData',
-    type: 'object',
+    type: 'document',
     fields: [
         {
             title: 'Service Type',
@@ -19,6 +19,16 @@ export default {
 
             },
         },
+        {
+            name: 'slug',
+            title: 'Slug',
+            type: 'slug',
+            description: 'Some frontend will require a slug to be set to be able to show the person',
+            options: {
+              source: 'serviceType',
+              maxLength: 96
+            }
+          },
         {
             title: 'Service Date',
             name: 'serviceDate',
