@@ -103,7 +103,7 @@ async function createClientPage (graphql, actions, reporter) {
   clientEdges.forEach(edge => {
     const { id, name = {}} = edge.node
     const slug = edge.node.slug.current
-    const path = `/clients/${slug}/`
+    const path = `/client/${slug}/`
 
     reporter.info(`Creating clients page: ${path}`)
 
@@ -123,6 +123,10 @@ async function createServicePage (graphql, actions, reporter) {
         edges {
           node {
             id
+            services {
+              serviceType
+              serviceDate
+            }
             slug {
               current
             }
@@ -134,12 +138,14 @@ async function createServicePage (graphql, actions, reporter) {
 
   if (result.errors) throw result.errors
 
-  const serviceEdges = (result.data.allSanityService || {}).edges || []
+  const serviceEdges = (result.data.allSanityClient || {}).edges || []
 
   serviceEdges.forEach(edge => {
     const { id, name = {}} = edge.node
     const slug = edge.node.slug.current
-    const path = `/servicePage/${slug}/`
+    const serviceDate = edge.node.serviceDate
+    const dateSegment = format(serviceDate, 'YYYY-MM')
+    const path = `/client/${slug}/service/${dateSegment}/`
 
     reporter.info(`Creating service page: ${path}`)
 
