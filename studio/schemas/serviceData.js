@@ -1,7 +1,7 @@
 export default {
     title: 'Service Data',
     name: 'serviceData',
-    type: 'document',
+    type: 'object',
     fields: [
         {
             title: 'Service Type',
@@ -19,16 +19,6 @@ export default {
 
             },
         },
-        {
-            name: 'slug',
-            title: 'Slug',
-            type: 'slug',
-            description: 'Some frontend will require a slug to be set to be able to show the person',
-            options: {
-              source: 'serviceType',
-              maxLength: 96
-            }
-          },
         {
             title: 'Service Date',
             name: 'serviceDate',
@@ -100,5 +90,27 @@ export default {
             name: 'description3',
             type: 'text'
         },
-    ]
+    ],
+    orderings: [
+        {
+          title: 'Service Date',
+          name: 'serviceDate',
+          by: [
+            {field: 'serviceDate', direction: 'asc'}
+          ]
+        }
+    ],
+    preview: {
+        select: {
+          serviceType: 'serviceType',
+          serviceDate: 'serviceDate'
+        },
+        prepare(serviceData, viewOptions = {}) {
+          const serviceType = viewOptions.ordering && viewOptions.ordering.name === 'serviceDate'
+          ? `${serviceData.serviceType} (${serviceData.serviceDate})`
+          : serviceData.serviceType
+    
+          return {serviceType: serviceType}
+        }
+    }
 }
