@@ -1,3 +1,5 @@
+import serviceData from "./serviceData"
+
 export default {
   name: 'client',
   title: 'Client',
@@ -74,6 +76,15 @@ export default {
       of: [{ type: 'serviceData' }]
     }
   ],
+  orderings: [
+    {
+      title: 'Service History',
+      name: 'serviceData.serviceDate',
+      by: [
+        {field: 'serviceData.serviceDate', direction: 'asc'}
+      ]
+    }
+],
   preview: {
     select: {
       title: 'lastName', //Might change this to (lastName: 'lastName')
@@ -81,6 +92,9 @@ export default {
       services: 'services' 
     },
     prepare ({ title = 'No name', firstName }) {
+      //const title = viewOptions.ordering && viewOptions.ordering.name === 'serviceDate'
+      //? `${serviceData.title} (${serviceData.serviceDate})`
+      //: serviceData.title
       return {
         title,
         subtitle: firstName
