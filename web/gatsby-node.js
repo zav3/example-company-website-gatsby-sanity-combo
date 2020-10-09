@@ -143,9 +143,9 @@ async function createServicePage (graphql, actions, reporter) {
   serviceEdges.forEach(edge => {
     const { id, name = {}} = edge.node
     const slug = edge.node.slug.current
-    const serviceDate = edge.node.serviceDate
+    const serviceDate = edge.node.services.serviceDate
     const dateSegment = format(serviceDate, 'YYYY-MM')
-    const path = `/client/${slug}/service/${dateSegment}/`
+    const path = `${edge.node.services.serviceDate}`
 
     reporter.info(`Creating service page: ${path}`)
 
