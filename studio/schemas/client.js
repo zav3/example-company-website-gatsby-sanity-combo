@@ -1,4 +1,3 @@
-import serviceData from "./serviceData"
 
 export default {
   name: 'client',
@@ -79,12 +78,12 @@ export default {
   orderings: [
     {
       title: 'Service History',
-      name: 'serviceData.serviceDate',
+      name: 'services',
       by: [
-        {field: 'serviceData.serviceDate', direction: 'asc'}
+        {field: 'services', direction: 'asc'}
       ]
     }
-],
+  ],
   preview: {
     select: {
       title: 'lastName', //Might change this to (lastName: 'lastName')

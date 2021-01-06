@@ -89,7 +89,7 @@ export default {
             title: 'Description/Service Notes',
             name: 'description3',
             type: 'text'
-        },
+        }
     ],
     orderings: [
         {
@@ -102,15 +102,17 @@ export default {
     ],
     preview: {
         select: {
-          serviceType: 'serviceType',
+          title: 'serviceType',
           serviceDate: 'serviceDate'
         },
         prepare(serviceData, viewOptions = {}) {
-          const serviceType = viewOptions.ordering && viewOptions.ordering.name === 'serviceDate'
-          ? `${serviceData.serviceType} (${serviceData.serviceDate})`
-          : serviceData.serviceType
-    
-          return {serviceType: serviceType}
+          const title = viewOptions.ordering && viewOptions.ordering.name === 'serviceDate'
+          ? `${serviceData.title} (${serviceData.serviceDate})`
+          : `${serviceData.title} (${serviceData.serviceDate})`
+          
+          return {
+              title
+            }
         }
     }
 }
