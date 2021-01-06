@@ -91,7 +91,6 @@ export default {
             type: 'text'
         },
     ],
-<<<<<<< Updated upstream
     orderings: [
         {
           title: 'Service Date',
@@ -112,22 +111,6 @@ export default {
           : serviceData.serviceType
     
           return {serviceType: serviceType}
-=======
-    
-    preview: {
-        select: {
-          title: 'serviceType', 
-          serviceDate: 'serviceDate' 
-        },
-        prepare (selection) {
-            const {title, serviceDate} = selection
-            return {
-                title: title,
-                subtitle: serviceDate
-                //  ? serviceDate
-                //  : 'no service date entered'
-            }
->>>>>>> Stashed changes
         }
     }
 }
