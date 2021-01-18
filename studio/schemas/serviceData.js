@@ -20,6 +20,16 @@ export default {
             },
         },
         {
+            title: 'Slug',
+            name: 'slug',
+            type: 'slug',
+            description: 'Some frontend will require a slug to be set to be able to show the service',
+            options: {
+                source: (doc, {parent}) => parent && parent.title                
+            }
+
+        },
+        {
             title: 'Service Date',
             name: 'serviceDate',
             type: 'date',
