@@ -80,7 +80,7 @@ function Client (props) {
                 <ul>
                     {services.map(service => (
                       <li key={service._id}>
-                        <Link to={`/client/${props.slug.current}/service/${service.serviceDate}`}>{service.serviceDate}</Link>
+                        <Link to={`/service/${service.serviceType}`}>{service.serviceDate}</Link>
                       </li>
                   ))}
                 </ul>
