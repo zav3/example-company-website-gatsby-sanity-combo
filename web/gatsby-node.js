@@ -115,52 +115,23 @@ async function createClientPage (graphql, actions, reporter) {
   })
 }
 
-async function createServicePage (graphql, actions, reporter) {
+async function createServicePage (actions, reporter) {
   const { createPage } = actions
-  const result = await graphql(`
-    {
-      allSanityClient(filter: { slug: { current: { ne: null } } }) {
-        edges {
-          node {
-            id
-            services {
-              serviceType
-              serviceDate
-            }
-            slug {
-              current
-            }
-          }
-        }
-      }
-    }
-  `)
+  const result = componentsRenderer(data.page.layout.columns)
 
-  if (result.errors) throw result.errors
+  reporter.info(`Creating service page: ${path}`)
 
-  const serviceEdges = (result.data.allSanityClient || {}).edges || []
-
-  serviceEdges.forEach(edge => {
-    const { id, name = {}} = edge.node
-    const slug = edge.node.slug.current
-    const serviceDate = edge.node.services.serviceDate
-    const dateSegment = format(serviceDate, 'YYYY-MM')
-    const path = `${edge.node.services.serviceDate}`
-
-    reporter.info(`Creating service page: ${path}`)
-
-    createPage({
-      path,
-      component: require.resolve('./src/templates/service.js'),
-      context: { id }
-    })
+  createPage({
+      path: data.page.name,
+      component: path.resolve('./src/templates/service.js'),
+      context: { children: result }
   })
 }
 exports.createPages = async ({ graphql, actions, reporter }) => {
   await createBlogPostPages(graphql, actions, reporter)
   await createProjectPages(graphql, actions, reporter)
   await createClientPage(graphql, actions, reporter)
-  await createServicePage(graphql, actions, reporter)
+  await createServicePage(actions, reporter)
   
 }
 
